@@ -1,0 +1,64 @@
+{
+  "formatVersion": "1.0",
+  "directory": "AI-Context",
+  "generatedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "lastUpdatedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "project": {
+    "name": "REPLACE_WITH_PROJECT_NAME",
+    "description": "REPLACE_WITH_SHORT_DESCRIPTION"
+  },
+  "documents": [
+    {
+      "path": "README.md",
+      "purpose": "Reading guide and usage rules"
+    },
+    {
+      "path": "project-overview.md",
+      "purpose": "System purpose and boundaries"
+    },
+    {
+      "path": "business-context.md",
+      "purpose": "Business goals, actors, rules, and workflows"
+    },
+    {
+      "path": "domain-model.md",
+      "purpose": "Domain concepts, relationships, and lifecycle"
+    },
+    {
+      "path": "architecture.md",
+      "purpose": "Runtime structure and technical boundaries"
+    },
+    {
+      "path": "design-patterns.md",
+      "purpose": "Patterns and implementation conventions"
+    },
+    {
+      "path": "coding-standards.md",
+      "purpose": "Code organization and engineering conventions"
+    },
+    {
+      "path": "testing-strategy.md",
+      "purpose": "Testing levels, conventions, and commands"
+    },
+    {
+      "path": "feature-catalog.md",
+      "purpose": "Implemented feature inventory"
+    },
+    {
+      "path": "decisions.md",
+      "purpose": "Important business and architecture decisions"
+    },
+    {
+      "path": "glossary.md",
+      "purpose": "Canonical terminology"
+    },
+    {
+      "path": "open-questions.md",
+      "purpose": "Unknown or unresolved matters"
+    },
+    {
+      "path": "change-log.md",
+      "purpose": "History of context changes"
+    }
+  ]
+}
