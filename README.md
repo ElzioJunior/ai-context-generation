@@ -5,7 +5,7 @@ AI-readable knowledge base inside software projects. <br>
 The workflow does not provide a parser, CLI, plugin, or runtime. Instead, it
 defines instructions that an AI coding agent can follow directly.
 
-![](/home/elzio/Documents/projects/ai-context-generation/project-idea.png)
+![](project-idea.png)
 
 ## Governance
 
