@@ -1,18 +1,11 @@
-# AI Context Workflow
+# AI Context Generation
 
 A vendor-agnostic, workflow-only specification for creating and maintaining an
-AI-readable knowledge base inside software projects.
-
+AI-readable knowledge base inside software projects. <br>
 The workflow does not provide a parser, CLI, plugin, or runtime. Instead, it
 defines instructions that an AI coding agent can follow directly.
 
-## Why AI Context Generation?
-
-AI Context Generation provides AI agents with a persistent, structured understanding of a project.
-
-Instead of repeatedly rediscovering business rules, architecture, coding standards, and testing conventions from source code, agents read the existing AI-Context knowledge base and inspect only what has changed.
-
-This reduces repeated repository analysis, lowers token consumption, decreases AI operational costs, and produces more consistent development across AI sessions.
+![](/home/elzio/Documents/projects/ai-context-generation/project-idea.png)
 
 ## Governance
 
