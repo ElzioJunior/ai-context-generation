@@ -45,8 +45,17 @@ AI-Context/
 
 ## How to use
 
+Clone this repository
+
 Copy `AGENTS.md`, the `workflows` directory, and the `templates` directory into
-the project or into a shared agent-instructions repository.
+the project or into a shared agent-instructions repository:
+```
+cp -R \
+  AI-Context-Generation/workflows \
+  AI-Context-Generation/templates \
+  AI-Context-Generation/AGENTS.md \
+[YOUR_REPOSITORY_FOLDER]
+```
 
 Then instruct the coding agent with one of these commands:
 
