@@ -9,6 +9,11 @@ code.
 
 ## Reading order
 
+For a specific question, check `manifest.json`'s `topics` map first and read
+only the one or two files it points to. Fall back to the full sequential
+order below only when the topic isn't listed, or when the task requires
+broad context (for example, initializing or updating this directory itself):
+
 1. `manifest.json`
 2. `project-overview.md`
 3. `business-context.md`
@@ -25,6 +30,9 @@ code.
 
 ## Agent usage rules
 
+- Check `manifest.json`'s `topics` map before reading anything else; read only
+  the matched file(s) unless the question spans multiple topics or none
+  match.
 - Read the relevant context before making changes.
 - Verify context against the current code when accuracy is critical.
 - Treat `open-questions.md` as unresolved information.

@@ -17,7 +17,7 @@ These rules ensure that agents remain inside the target repository, inspect only
 
 ### `initialize`
 
-Creates the initial `AI-Context` knowledge base by inspecting the current
+Creates the initial `ai-context` knowledge base by inspecting the current
 project, its source code, tests, configuration, documentation, and repository
 history when available.
 
@@ -25,15 +25,33 @@ history when available.
 
 ### `update`
 
-Updates the existing `AI-Context` knowledge base after features, architectural
+Updates the existing `ai-context` knowledge base after features, architectural
 changes, business-rule changes, refactorings, or test-strategy changes.
 
 ## Generated directory
 
-The workflow creates the following directory inside the target project:
+Copying this repository's `ai-context` folder into a target project gives it
+everything needed to run the tool:
 
 ```text
-AI-Context/
+ai-context/
+└── agent/              (the tool — copy verbatim, never edit or generate into it)
+    ├── AGENTS.md
+    ├── workflows/
+    │   ├── initialize.md
+    │   └── update.md
+    ├── templates/
+    │   └── ...
+    └── scripts/
+        └── validate_context.py
+```
+
+Running `initialize` or `update` populates `ai-context/` itself — as siblings
+of `agent/`, never inside it:
+
+```text
+ai-context/
+├── agent/               (unchanged — the tool)
 ├── README.md
 ├── manifest.json
 ├── project-overview.md
@@ -52,30 +70,39 @@ AI-Context/
 
 ## How to use
 
-Clone this repository
+Clone this repository, then copy its `ai-context` folder — as a single unit —
+into the target project:
 
-Copy `AGENTS.md`, the `workflows` directory, and the `templates` directory into
-the project or into a shared agent-instructions repository:
 ```
-cp -R \
-  AI-Context-Generation/workflows \
-  AI-Context-Generation/templates \
-  AI-Context-Generation/AGENTS.md \
-[YOUR_REPOSITORY_FOLDER]
+cp -R ai-context-generation/ai-context [YOUR_REPOSITORY_FOLDER]/ai-context
 ```
 
-Then instruct the coding agent with one of these commands:
+Then, from inside the target project, instruct the coding agent with one of
+these commands:
 
 ```text
-Follow AGENTS.md and execute the initialize workflow.
+Follow ai-context/agent/AGENTS.md and execute the initialize workflow.
 ```
 
 ```text
-Follow AGENTS.md and execute the update workflow for the current changes.
+Follow ai-context/agent/AGENTS.md and execute the update workflow for the current changes.
 ```
 
-The agent must inspect the repository, create or update `AI-Context`, report
-uncertainties, and avoid inventing facts.
+The agent must inspect the repository, create or update the files in
+`ai-context/` (never inside `ai-context/agent/`), report uncertainties, and
+avoid inventing facts.
+
+Before reporting either workflow complete, run the validator against the
+generated directory:
+
+```text
+python3 ai-context/agent/scripts/validate_context.py ai-context
+```
+
+It requires no dependencies beyond the Python 3 standard library — nothing to
+install. Resolve every `ERROR` line before finishing; `WARNING` lines are
+judgment calls (for example, a duplicate line that's a genuine
+false-positive).
 
 ## Design principles
 

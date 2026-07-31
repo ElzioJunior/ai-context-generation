@@ -1,6 +1,6 @@
 {
   "formatVersion": "1.0",
-  "directory": "AI-Context",
+  "directory": "ai-context",
   "generatedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
   "lastUpdatedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
   "project": {
@@ -60,5 +60,8 @@
       "path": "change-log.md",
       "purpose": "History of context changes"
     }
-  ]
+  ],
+  "topics": {
+    "REPLACE_WITH_TOPIC_KEYWORD": ["REPLACE_WITH_CANONICAL_FILE.md"]
+  }
 }

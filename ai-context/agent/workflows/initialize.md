@@ -8,7 +8,7 @@ Alias: `generate`
 
 ## Goal
 
-Create a complete initial `AI-Context` knowledge base from the current project.
+Create a complete initial `ai-context` knowledge base from the current project.
 
 ## Procedure
 
@@ -86,12 +86,27 @@ Identify:
 - Coverage expectations when explicitly defined
 - Commands used to run tests
 
-### 6. Generate `AI-Context`
+### 6. Generate `ai-context`
 
-Create every file defined in the template directory.
+Create every file defined in `ai-context/agent/templates/`, written as
+siblings of `ai-context/agent/` (for example `ai-context/architecture.md`,
+not `ai-context/agent/architecture.md`).
 
 Replace template guidance with repository-specific content. Keep section
 headings unless they are demonstrably irrelevant.
+
+For every countable artifact (entities, endpoints, test files, external
+clients, enum values), produce the list by `grep`/`find` across the relevant
+directory — never by sampling a few representative examples (AGENTS.md
+Rule 13).
+
+Tag every non-trivial claim with its provenance — `[VERIFIED: ...]`,
+`[POLICY: ...]`, or `[Not confirmed]` (Rule 11). Where a fact would
+otherwise need to be restated in more than one file, write it once in its
+canonical file and link to it from the others (Rule 12).
+
+Populate `manifest.json`'s `topics` map so each topic points at its one or
+two canonical files (Rule 16).
 
 ### 7. Validate consistency
 
@@ -102,7 +117,11 @@ Check that:
 - Testing descriptions match existing tests.
 - Decisions do not contradict source code.
 - Unknowns are recorded in `open-questions.md`.
-- `manifest.json` lists every generated context file.
+- `manifest.json` lists every generated context file and its `topics` map is
+  complete.
+- No fact is restated in more than one file (Rule 12) — grep the draft files
+  for repeated claims before finishing.
+- Every claim carries a provenance tag (Rule 11).
 
 ### 8. Report completion
 
@@ -120,4 +139,4 @@ Return:
 - Do not change production code unless explicitly requested.
 - Do not refactor while generating context.
 - Do not fabricate missing requirements.
-- Do not remove existing documentation outside `AI-Context`.
+- Do not remove existing documentation outside `ai-context`.

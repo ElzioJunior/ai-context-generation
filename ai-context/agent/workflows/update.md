@@ -6,7 +6,7 @@
 
 ## Goal
 
-Synchronize the existing `AI-Context` knowledge base with new repository
+Synchronize the existing `ai-context` knowledge base with new repository
 changes while preserving valid prior knowledge.
 
 ## Inputs
@@ -16,11 +16,13 @@ Use all available evidence:
 - User description of the new feature or change
 - Current working tree
 - Git diff
-- Relevant commits
+- Relevant commits (read-only — see AGENTS.md Rule 15 for when git history
+  specifically resolves a precision gap: missing decision rationale,
+  TODO/comment currency, legacy-pattern status)
 - Updated tests
 - Updated contracts
 - Updated migrations
-- Existing `AI-Context`
+- Existing `ai-context`
 
 ## Procedure
 
@@ -67,6 +69,19 @@ Preserve valid content. Avoid rewriting unrelated sections.
 When a behavior is removed, update all affected references and record the
 removal in the change log.
 
+Tag every added or changed claim with its provenance (Rule 11). If the
+change corrects a fact that also appears elsewhere (Rule 12), fix the
+canonical copy and convert the others to a link — do not leave a second,
+now-divergent restatement in place.
+
+### 4a. Cross-file consistency sweep
+
+Before continuing to step 5, search every `ai-context` file for the
+term(s), entity, or pattern name touched by this update — not only the
+file(s) already edited. If the term appears elsewhere with contradicting or
+stale content, fix it in this same pass (Rule 14). A fix that lands in only
+one file, while the same fact sits stale in others, is not complete.
+
 ### 5. Update the feature catalog
 
 For a new or changed feature, document:
@@ -82,6 +97,10 @@ For a new or changed feature, document:
 - Related modules
 - Related tests
 - Known limitations
+
+If the feature adds or changes a countable artifact (endpoints, entities,
+enum values), enumerate it exhaustively via `grep`/`find` rather than listing
+only the examples the user mentioned (Rule 13).
 
 ### 6. Update decisions and questions
 
@@ -104,7 +123,10 @@ Add a dated entry containing:
 ### 8. Validate consistency
 
 Ensure that terminology, features, architecture, and tests remain aligned
-across every context file.
+across every context file. Confirm the cross-file sweep (step 4a) found no
+remaining duplicate or contradicting copies of the changed fact, and that
+`manifest.json`'s `topics` map still points to the correct canonical file if
+a fact moved.
 
 ### 9. Report completion
 
