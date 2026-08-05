@@ -16,6 +16,34 @@ These governance rules are mandatory for every workflow.
 
 They take precedence over all workflow instructions and must not be bypassed unless the user explicitly authorizes a specific exception.
 
+## Architecture Decision Records (ADRs)
+
+Before executing any workflow, read every Architecture Decision Record (ADR)
+under the `ADR/` directory.
+
+ADRs define the architectural principles, long-term design decisions, and
+constraints of AI Context Generation.
+
+When an ADR conflicts with an implementation detail, the ADR takes precedence
+unless a newer ADR explicitly supersedes it.
+
+When introducing a new architectural decision that is not covered by an
+existing ADR, propose creating a new ADR instead of silently changing the
+architecture.
+
+## Context Resolution Strategy
+
+For every request:
+
+1. Read the AI-Context before inspecting the repository.
+2. Classify the request as either:
+  - Knowledge Task
+  - Implementation Task
+3. Knowledge Tasks must rely on AI-Context whenever possible.
+4. Implementation Tasks may inspect source code only after consulting AI-Context.
+5. Repository traversal must always be minimized.
+6. When implementation and AI-Context differ, treat the implementation as the current source of truth and recommend updating the AI-Context.
+
 ## Rule 1 — Repository Boundary
 
 The agent and any sub-agents must remain strictly inside the current repository.
@@ -281,6 +309,7 @@ Update the existing `ai-context` directory using the current repository state an
 11. Use the templates under `ai-context/agent/templates` as the required output structure.
 12. Tag every non-trivial claim with its provenance (Rule 11) and write each fact in exactly one canonical file (Rule 12).
 13. Write terse, declarative sentences. Omit narrative or connective filler ("It should be noted that...", "This is important because...") and do not restate the question or section heading in prose — a consuming agent pays token cost for every word regenerated here, on every future read.
+14. Architectural decisions must always comply with the existing ADRs. Never introduce a new architectural direction that contradicts an ADR unless explicitly requested by the user.
 
 ---
 
@@ -315,8 +344,8 @@ A workflow is complete only when:
 * Every claim added or changed carries a provenance tag (Rule 11).
 * No fact touched by this run is left duplicated across files without being reconciled to a single canonical source (Rule 12).
 * Open uncertainties are documented.
-* `ai-context/agent/scripts/validate_context.py` has been run against the
-  generated `ai-context` directory and every reported `ERROR` is resolved. If
-  the script is not present, note that explicitly in the completion report
-  instead of skipping the check silently.
+* `ai-context/agent/scripts/validate_context.py` has been run against the generated `ai-context` directory and every reported `ERROR` is resolved. If
+  the script is not present, note that explicitly in the completion report instead of skipping the check silently.
 * The final response summarizes the created or updated files and the most important findings.
+* Existing ADRs remain respected throughout the workflow.
+* If the workflow reveals a new architectural decision that should be preserved for future development, recommend creating a new ADR.
